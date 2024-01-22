@@ -1,8 +1,11 @@
 {
   "name": "prisma__1",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.ts "
+  },
   "devDependencies": {
     "@types/node": "^20.4.5",
     "nodemon": "^3.0.1",
@@ -10,5 +13,8 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   },
-  "author": "yonas"
+  "author": "yonas",
+  "dependencies": {
+    "@prisma/client": "^5.0.0"
+  }
 }

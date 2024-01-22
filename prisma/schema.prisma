@@ -9,3 +9,30 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id    String @id @default(uuid())
+  name  String
+  email String @unique
+  posts Post[]
+  age   Int
+  role  Role   @default(USER)
+
+  @@unique([name, age])
+  @@index([email, name])
+}
+
+model Post {
+  id       String   @id @default(uuid())
+  title    String
+  rating   Float
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+  author   User     @relation(fields: [userId], references: [id])
+  userId   String
+}
