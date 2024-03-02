@@ -1,19 +1,10 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
     "esModuleInterop": true,
     "lib": ["esnext"],
-    "strict": true
+    "sourceMap": true
+    // "strict": true,
   },
   "include": ["src/**/*"]
 }
-// {
-//   "compilerOptions": {
-//     "skipLibCheck": true,
-//     "strict": true,
-//     "rootDir": "src",
-//     "noEmit": true
-//   },
-//   "include": ["src/**/*"]
-// }
