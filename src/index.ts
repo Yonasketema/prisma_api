@@ -1,23 +1,18 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import express from "express";
+import morgan from "morgan";
+import path from "path";
 
-async function main() {
-  const user = await prisma.user.create({
-    data: {
-      name: "yonas",
-      email: "yon@gmail.com",
-      age: 31,
-    },
-  });
-  // const users = await prisma.user.findMany();
-  // await prisma.user.deleteMany();
-  console.log(user);
-}
+import router from "./router";
 
-main()
-  .catch((e) => {
-    console.error(e);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+const app = express();
+
+app.use(morgan("dev"));
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve("public/index.html"));
+});
+
+app.use("/api", router);
+
+export default app;
