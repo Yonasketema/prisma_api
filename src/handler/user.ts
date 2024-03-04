@@ -9,8 +9,8 @@ export const createUser = async (req, res) => {
       password: await hashPassword(req.body.password),
     },
   });
-  const token = createJWT(user);
 
+  const token = createJWT(user);
   res.status(201).json({ token });
 };
 

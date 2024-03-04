@@ -1,27 +1,47 @@
 import { Router } from "express";
+import { body } from "express-validator";
+
 import { createUser, signin } from "./handler/user";
+import { handleValidationErrors } from "./modules/middlewares";
+import {
+  createPost,
+  deletePost,
+  getOnePost,
+  getPosts,
+  updatePost,
+} from "./handler/post";
+import { protect } from "./modules/auth";
 
 const router = Router();
 
 /**
- * Product Route
+ * Post Route
  */
 
-router.get("/product", (req, res) => {
-  console.log(req.query);
-  res.json({ message: "hello" });
-});
-
-router.post("/product", () => {});
-router.put("/product/:id", () => {});
-router.get("/product/:id", () => {});
-router.delete("/product/:id", () => {});
+router.get("/post", getPosts);
+router.get("/post/:id", getOnePost);
+router.post("/post", protect, body("title").exists().isString(), createPost);
+router.put("/post/:id", protect, body("title").exists().isString(), updatePost);
+router.delete("/post/:id", protect, deletePost);
 
 /**
  * Auth Route
  */
 
-router.post("/signup", createUser);
-router.post("/signin", signin);
+router.post(
+  "/signup",
+  body("name").exists().isString(),
+  body("email").exists().isString().isEmail(),
+  body("password").exists().isString(),
+  handleValidationErrors,
+  createUser
+);
+
+router.post(
+  "/signin",
+  body("email").exists().isString().isEmail(),
+  body("password").exists().isString(),
+  signin
+);
 
 export default router;

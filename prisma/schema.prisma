@@ -1,5 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// mysql://<user>:<password>@127.0.0.1:3306/<db-name> 
 
 generator client {
   provider = "prisma-client-js"
@@ -29,10 +28,11 @@ model User {
 
 model Post {
   id       String   @id @default(uuid())
+  updateAt DateTime @updatedAt
+  createAt DateTime @default(now())
   title    String
   rating   Float
-  createAt DateTime @default(now())
-  updateAt DateTime @updatedAt
-  author   User     @relation(fields: [userId], references: [id])
+  post     String
   userId   String
+  author   User     @relation(fields: [userId], references: [id])
 }
