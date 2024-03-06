@@ -31,6 +31,7 @@ export const createPost = async (req, res) => {
       rating: 1,
       title: req.body.title,
       userId: req.user.id,
+      post: req.body.post,
     },
   });
 
@@ -48,6 +49,7 @@ export const updatePost = async (req, res) => {
     },
     data: {
       title: req.body.title,
+      post: req.body.post,
     },
   });
 

@@ -20,8 +20,20 @@ const router = Router();
 
 router.get("/post", getPosts);
 router.get("/post/:id", getOnePost);
-router.post("/post", protect, body("title").exists().isString(), createPost);
-router.put("/post/:id", protect, body("title").exists().isString(), updatePost);
+router.post(
+  "/post",
+  protect,
+  body("title").exists().isString(),
+  body("post").exists().isString(),
+  createPost
+);
+router.put(
+  "/post/:id",
+  protect,
+  body("title").optional().isString(),
+  body("post").optional().isString(),
+  updatePost
+);
 router.delete("/post/:id", protect, deletePost);
 
 /**
