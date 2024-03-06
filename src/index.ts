@@ -15,4 +15,20 @@ app.get("/", (req, res) => {
 
 app.use("/api", router);
 
+app.use((error, req, res, next) => {
+  if (error.type === "auth") {
+    res.status(401).json({
+      message: "authorization",
+    });
+  } else if (error.type === "input") {
+    res.status(400).json({
+      message: "invalid input",
+    });
+  } else {
+    res.status(500).json({
+      message: "internal error",
+    });
+  }
+});
+
 export default app;

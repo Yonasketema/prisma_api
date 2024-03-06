@@ -1,4 +1,5 @@
 import prisma from "../db";
+import { Request, Response, NextFunction } from "express";
 
 export const getPosts = async (req, res) => {
   const posts = await prisma.post.findMany();
