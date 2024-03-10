@@ -6,7 +6,7 @@ let envConfig;
 
 if (process.env.NODE_ENV === "production") {
   envConfig = require("./prod").default;
-} else {
+} else if (process.env.NODE_ENV === "development") {
   envConfig = require("./dev").default;
 }
 
